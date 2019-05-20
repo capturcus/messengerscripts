@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+# this script is meant to be pasted into a jupyter notebook
 
 import fbutil, json
 import pandas as pd
@@ -9,7 +10,7 @@ from holoviews import opts
 hv.extension('bokeh')
 
 print("imported deps")
-"""
+
 msgs = fbutil.getAllMessages()
 
 print("imported all messages")
@@ -27,24 +28,10 @@ for msg in msgs:
 days_tab = [k for k in days]
 msgs_tab = [days[k] for k in days]
 
-"""
-def avg(l):
-    return sum(l)/len(l)
-
-def moving_avg(l, N):
-    half = round(N/2)+1
-    cumavg = l[:half]
-    ret = []
-    for i in range(len(l)):
-        print (l[i], cumavg)
-        ret.append(avg(cumavg))
-        if i+half < len(l):
-            cumavg.append(l[i+half])
-        if len(cumavg) > N or len(l)-i-1 < N:
-            cumavg = cumavg[1:]
-    return ret
 
 x = [1,2,3,4,5,6,7,8]
 N = 5
 
-print(np.convolve(x, np.ones((N,))/N, mode='valid'))
+msgs_avg = np.convolve(x, np.ones((N,))/N, mode='valid')
+
+hv.Points((days_tab, msgs_avg)).options(width=900, height=600)
