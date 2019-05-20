@@ -1,0 +1,5 @@
+*.pyc
+.vscode
+get-pip.py
+SmsContactsBackup/
+.ipynb_checkpoints/
