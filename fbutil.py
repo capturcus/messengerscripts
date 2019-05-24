@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import functools, datetime, pytz, sys, os, json, re
-# from whaaaaat import prompt
+import functools, datetime, pytz, sys, os, json, re, inquirer
 
 warsaw_tz = pytz.timezone('Europe/Warsaw')
 
@@ -25,6 +24,7 @@ def validateDate(d):
     return True
 
 def promptDate(msg):
+    """
     questions = [
         {
             'type': 'input',
@@ -37,6 +37,8 @@ def promptDate(msg):
     finaldate = answers['date']
     l = list(map(int, finaldate.split(".")))
     return datetime.datetime(l[2], l[1], l[0])
+    """
+    raise "unsupported"
 
 def promptConvo(name):
     dirs = os.listdir("..")
@@ -46,16 +48,13 @@ def promptConvo(name):
             names.append(d)
 
     if len(names) > 1:
-        print (names)
         questions = [
-            {
-                'type': 'list',
-                'name': 'first_name',
-                'message': 'which one?',
-                'choices': names
-            }
+        inquirer.List('first_name',
+                message="which one?",
+                choices=names,
+            ),
         ]
-        answers = prompt(questions)
+        answers = inquirer.prompt(questions)
         finalname = answers['first_name']
         return finalname
     elif len(names) == 0:

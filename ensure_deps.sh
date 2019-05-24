@@ -8,4 +8,4 @@ fi
 
 sudo apt-get install -y python3-dev
 
-sudo python3 -m pip install 'prompt_toolkit==1.0.14' whaaaaat pytz
+sudo python3 -m pip install inquirer pytz
