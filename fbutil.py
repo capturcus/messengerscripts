@@ -48,6 +48,9 @@ def promptConvo(name):
             names.append(d)
 
     if len(names) > 1:
+        if len(names) == 2 and names[0].lower() == names[1].lower():
+            return names[0] if names[0].lower() == names[0] else names[1]
+
         questions = [
         inquirer.List('first_name',
                 message="which one?",
