@@ -46,6 +46,7 @@ def promptConvo(name):
             names.append(d)
 
     if len(names) > 1:
+        print (names)
         questions = [
             {
                 'type': 'list',
@@ -184,3 +185,16 @@ def printMessages(msgs):
         if len(convos) > 1:
             line = ("[{}] "+" "*(maxConvLen - len(convostamp))).format(convostamp) + line
         sys.stdout.write(line+"\n")
+
+def avg(l):
+    return sum(l)/len(l)
+
+def datapointsDayToWeek(l):
+    ret = []
+    while len(l) > 7:
+        week = l[:7]
+        dt = week[0][0]
+        a = avg([x[1] for x in week])
+        l = l[7:]
+        ret.append((dt, a))
+    return ret

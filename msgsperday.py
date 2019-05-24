@@ -28,10 +28,12 @@ for msg in msgs:
 days_tab = [k for k in days]
 msgs_tab = [days[k] for k in days]
 
+zip_it = zip(days_tab, msgs_tab)
 
-x = [1,2,3,4,5,6,7,8]
-N = 5
+data = []
+for i in zip_it:
+    data.append(i)
 
-msgs_avg = np.convolve(x, np.ones((N,))/N, mode='valid')
+weeks = fbutil.datapointsDayToWeek(data)
 
-hv.Points((days_tab, msgs_avg)).options(width=900, height=600)
+hv.Points(weeks).options(width=900, height=600)

@@ -32,8 +32,7 @@ for k in sorted(days.items()):
     data.append((k[0], len(k[1])))
 N = 5
 
-# print(data)
 
-# convos_avg = np.convolve(convos_tab, np.ones((N,))/N, mode='valid')
+weeks = fbutil.datapointsDayToWeek(data)
 
-hv.Points(data).options(width=900, height=600)
+hv.Points(weeks).options(width=900, height=600)
