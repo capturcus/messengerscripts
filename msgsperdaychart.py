@@ -2,17 +2,13 @@
 
 # this script is meant to be pasted into a jupyter notebook
 
-from collections import OrderedDict
-import fbutil, json, os
-import pandas as pd
-import numpy as np
+import fbutil, os
 import holoviews as hv
-from holoviews import opts
 hv.extension('bokeh')
 
 print("imported deps")
 
-girlMessages = []
+messages = []
 
 for folder in os.listdir(".."):
     if folder == "messengerscripts":
@@ -29,17 +25,14 @@ for folder in os.listdir(".."):
             participants.add(participant)
     
     if len(participants) == 1:
-        if list(participants)[0] == "":
-            continue
-        if list(participants)[0].split(" ")[0][-1] == "a":
-            girlMessages += convoMessages
+        messages += convoMessages
 
 
 print("imported all messages")
 
 days = {}
 
-for msg in girlMessages:
+for msg in messages:
     dt = fbutil.timestampMsToDate(msg['timestamp_ms'])
     newdt = dt.replace(hour=0, minute=0, second=0, microsecond=0)
 

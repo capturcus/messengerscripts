@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import functools, datetime, pytz, sys, os, json, re, inquirer
+import functools, datetime, pytz, sys, os, json, re, inquirer, glob
 
 warsaw_tz = pytz.timezone('Europe/Warsaw')
 
@@ -70,15 +70,19 @@ def promptConvo(name):
 def getMessagesOfConvo(messages_path):
     if messages_path is None:
         return None
-    relPath = "../"+messages_path+"/message.json"
-    if not os.path.isfile(relPath):
-        return []
-    with open(relPath) as f:
-        j = json.loads(f.read())
-        l = j['messages']
-        for m in l:
-            m['source_convo'] = messages_path
-        return l
+    relPath = "../"+messages_path+"/message*.json"
+    msgs = []
+    for fpath in glob.glob(relPath):
+        with open(fpath) as f:
+            j = json.loads(f.read())
+            l = j['messages']
+            for m in l:
+                m['source_convo'] = messages_path
+            msgs += l
+    d = {}
+    for m in msgs:
+        d[int(m["timestamp_ms"])] = m
+    return [v for k, v in d.items()]
 
 def getAllMessages():
     allMessages = []

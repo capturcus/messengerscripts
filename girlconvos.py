@@ -29,6 +29,8 @@ for folder in os.listdir(".."):
             participants.add(participant)
     
     if len(participants) == 1:
+        if list(participants)[0] == "":
+            continue
         if list(participants)[0].split(" ")[0][-1] == "a":
             girlMessages += convoMessages
 

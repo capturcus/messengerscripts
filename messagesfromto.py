@@ -10,11 +10,13 @@ END = sys.argv[2]
 val = fbutil.validateDate(START)
 if val is not True:
     print(val)
+    print(START)
     sys.exit(1)
 
 val = fbutil.validateDate(END)
 if val is not True:
     print(val)
+    print(END)
     sys.exit(1)
 
 l = list(map(int, START.split(".")))
